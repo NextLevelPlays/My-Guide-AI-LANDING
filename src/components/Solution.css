@@ -1,0 +1,116 @@
+.solution {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #000000 0%, #0a0a1a 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.solution-bg-glow-1 {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(0, 191, 255, 0.1) 0%, rgba(0, 191, 255, 0) 70%);
+  border-radius: 50%;
+  top: -100px;
+  left: 100px;
+  filter: blur(40px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.solution-bg-glow-2 {
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(0, 191, 255, 0.08) 0%, rgba(0, 191, 255, 0) 70%);
+  border-radius: 50%;
+  bottom: -50px;
+  right: 50px;
+  filter: blur(40px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.solution-content {
+  text-align: center;
+  max-width: 1000px;
+  position: relative;
+  z-index: 1;
+}
+
+.solution-content h2 {
+  font-family: 'Space Grotesk', 'Courier New', monospace;
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, #00BFFF 0%, #00E5FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.solution-subtitle {
+  font-size: 18px;
+  color: #A0A0A0;
+  margin-bottom: 48px;
+  line-height: 1.6;
+}
+
+.benefits {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 32px;
+  margin-bottom: 48px;
+}
+
+.benefit {
+  background: rgba(0, 191, 255, 0.08);
+  border: 1px solid rgba(0, 191, 255, 0.3);
+  border-radius: 8px;
+  padding: 32px 24px;
+  text-align: center;
+}
+
+.benefit-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.benefit-title {
+  font-family: 'Space Grotesk', 'Courier New', monospace;
+  font-size: 18px;
+  font-weight: 600;
+  color: #E0E0E0;
+  margin-bottom: 12px;
+}
+
+.benefit-description {
+  font-size: 14px;
+  color: #A0A0A0;
+  line-height: 1.5;
+}
+
+.solution-tech {
+  font-size: 16px;
+  color: #B0B0B0;
+  margin-top: 32px;
+}
+
+.highlight {
+  color: #00BFFF;
+}
+
+@media (max-width: 768px) {
+  .solution-content h2 {
+    font-size: 36px;
+  }
+
+  .benefits {
+    grid-template-columns: 1fr;
+  }
+}
