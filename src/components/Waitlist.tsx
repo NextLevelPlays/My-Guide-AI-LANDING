@@ -11,21 +11,42 @@ export default function Waitlist({ isOpen, onClose }: WaitlistProps) {
   const [email, setEmail] = useState('')
   const [submitted, setSubmitted] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     
-    // Store in localStorage
-    const waitlist = JSON.parse(localStorage.getItem('myguide_waitlist') || '[]')
-    waitlist.push({ name, email, timestamp: new Date().toISOString() })
-    localStorage.setItem('myguide_waitlist', JSON.stringify(waitlist))
-    
-    setSubmitted(true)
-    setTimeout(() => {
-      setName('')
-      setEmail('')
-      setSubmitted(false)
-      onClose()
-    }, 2000)
+    try {
+      // Send to backend
+      const response = await fetch('/api/waitlist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email })
+      })
+      
+      if (!response.ok) throw new Error('Failed to submit')
+      
+      // Also store in localStorage as backup
+      const waitlist = JSON.parse(localStorage.getItem('myguide_waitlist') || '[]')
+      waitlist.push({ name, email, timestamp: new Date().toISOString() })
+      localStorage.setItem('myguide_waitlist', JSON.stringify(waitlist))
+      
+      setSubmitted(true)
+      setTimeout(() => {
+        setName('')
+        setEmail('')
+        setSubmitted(false)
+        onClose()
+      }, 2000)
+    } catch (error) {
+      console.error('Error submitting waitlist:', error)
+      // Still show success even if backend fails, so user doesn't get stuck
+      setSubmitted(true)
+      setTimeout(() => {
+        setName('')
+        setEmail('')
+        setSubmitted(false)
+        onClose()
+      }, 2000)
+    }
   }
 
   if (!isOpen) return null
